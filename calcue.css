@@ -1,0 +1,179 @@
+/* Cyberpunk Blue Theme */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  color: #e0f7ff;
+  background: #0a0f1c;
+}
+
+/* Background video */
+#bg-video {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  filter: brightness(0.4) contrast(1.2);
+}
+
+/* Shared container (Sign Up, Login, Calculator) */
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(10, 20, 40, 0.9);
+  border: 2px solid #00f6ff;
+  box-shadow: 0 0 20px #00eaff, 0 0 40px #007a9e inset;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  width: 340px;        /* Good size for login & signup */
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Calculator container (smaller, desktop fit) */
+#calculator-page.container {
+  width: 260px;        /* much slimmer */
+  padding: 15px;
+  border: 2px solid #00f6ff;
+  border-radius: 10px;
+  background: rgba(10, 20, 40, 0.9);
+  box-shadow: 0 0 12px #00eaff, 0 0 20px #007a9e inset;
+  text-align: center;
+}
+
+.container h2 {
+  color: #00f6ff;
+  text-shadow: 0 0 10px #00f6ff, 0 0 20px #0096ff;
+  margin-bottom: 20px;
+}
+
+/* Input fields */
+input {
+  width: 90%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 2px solid #00f6ff;
+  border-radius: 8px;
+  background: #0d1a2b;
+  color: #e0f7ff;
+  font-size: 14px;
+  outline: none;
+  transition: 0.3s;
+}
+
+input:focus {
+  border-color: #00eaff;
+  box-shadow: 0 0 10px #00eaff;
+}
+
+/* Buttons */
+button {
+  width: 95%;
+  padding: 12px;
+  margin: 12px 0;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #00eaff, #0066ff);
+  color: #fff;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 12px #00eaff;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #0096ff, #00f6ff);
+  box-shadow: 0 0 20px #00f6ff, 0 0 40px #0077ff;
+}
+
+/* Logout button */
+.logout-btn {
+  background: linear-gradient(135deg, #555, #333);
+  box-shadow: 0 0 8px #444;
+}
+
+.logout-btn:hover {
+  background: linear-gradient(135deg, #777, #444);
+  box-shadow: 0 0 15px #888;
+}
+
+/* Hide/show */
+.hidden {
+  display: none;
+}
+
+/* === Calculator Display === */
+#display {
+  grid-column: span 4;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 2px solid #00f6ff;
+  border-radius: 6px;
+  background: #0d1a2b;
+  color: #00f6ff;
+  font-size: 16px;          /* smaller text */
+  font-weight: bold;
+  text-align: right;
+  text-shadow: 0 0 6px #00f6ff;
+  box-shadow: 0 0 8px #003366 inset;
+  overflow-x: auto;
+}
+
+/* === Calculator Grid === */
+.calculator {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;              /* smaller gaps */
+  margin-top: 8px;
+}
+
+
+/* === Calculator Buttons === */
+.calculator button {
+  padding: 8px;          /* smaller padding */
+  font-size: 13px;       /* smaller text */
+  font-weight: bold;
+  background: #0d1a2b;
+  border: 2px solid #00f6ff;
+  border-radius: 5px;
+  color: #00f6ff;
+  text-shadow: 0 0 6px #00f6ff;
+  box-shadow: 0 0 6px #003366 inset;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.calculator button:hover {
+  background: #001a33;
+  box-shadow: 0 0 12px #00f6ff, 0 0 18px #0077ff inset;
+}
+
+/* === Clear Button === */
+.calculator button[onclick="clearDisplay()"] {
+  grid-column: span 4;
+  background: linear-gradient(135deg, #ff3b3b, #b30000);
+  color: #fff;
+  border: none;
+  padding: 10px;          /* slightly bigger than numbers */
+  font-size: 14px;
+  box-shadow: 0 0 10px #ff3b3b;
+}
+.calculator button[onclick="clearDisplay()"]:hover {
+  background: linear-gradient(135deg, #ff5c5c, #cc0000);
+  box-shadow: 0 0 15px #ff4d4d, 0 0 20px #ff0000 inset;
+}
+/* Glow animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, -40%); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
+}

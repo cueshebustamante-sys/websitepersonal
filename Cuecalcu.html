@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculator with Login</title>
+  <link rel="stylesheet" href="calcue.css">
+</head>
+<body>
+  <video autoplay muted loop id="bg-video">
+    <source src="calbg.mp4" type="video/mp4">
+   
+  </video>
+
+  <!-- Sign Up Page -->
+  <div id="signup" class="container">
+    <h2>Sign Up</h2>
+    <input id="signup-username" type="text" placeholder="Username">
+    <input id="signup-password" type="password" placeholder="Password">
+    <button onclick="signUp()">Sign Up</button>
+    <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+  </div>
+
+  <!-- Login Page -->
+  <div id="login" class="container hidden">
+    <h2>Login</h2>
+    <input id="login-username" type="text" placeholder="Username">
+    <input id="login-password" type="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <p>No account? <a href="#" onclick="showSignUp()">Sign Up</a></p>
+  </div>
+
+  <!-- Calculator Page -->
+  <div id="calculator-page" class="container hidden">
+    <h2>Calculator</h2>
+    <div id="display">0</div>
+    <div class="calculator">
+      <button onclick="press('7')">7</button>
+      <button onclick="press('8')">8</button>
+      <button onclick="press('9')">9</button>
+      <button onclick="press('/')">÷</button>
+
+      <button onclick="press('4')">4</button>
+      <button onclick="press('5')">5</button>
+      <button onclick="press('6')">6</button>
+      <button onclick="press('*')">×</button>
+
+      <button onclick="press('1')">1</button>
+      <button onclick="press('2')">2</button>
+      <button onclick="press('3')">3</button>
+      <button onclick="press('-')">−</button>
+
+      <button onclick="press('0')">0</button>
+      <button onclick="press('.')">.</button>
+      <button onclick="calculate()">=</button>
+      <button onclick="press('+')">+</button>
+
+      <button onclick="clearDisplay()" style="grid-column: span 4; background:#e74c3c;">C</button>
+    </div>
+    <button onclick="logout()" class="logout-btn">Logout</button>
+  </div>
+
+  <script src="cuecal.js"></script>
+</body>
+</html>
