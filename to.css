@@ -1,11 +1,10 @@
-/* ===== Import futuristic font ===== */ 
+/* ===== Font ===== */ 
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
 
-/* ===== Body ===== */
 body {
   margin: 0;
   font-family: 'Orbitron', Arial, sans-serif;
-  background: #0a0f1c; /* dark cyberpunk background */
+  background: #0a0f1c;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,9 +13,9 @@ body {
   overflow: hidden;
 }
 
-/* ===== Card / To-do Box ===== */
+/* Card */
 .todo-box {
-  background: #0d111f; /* darker card background */
+  background: #0d111f;
   padding: 30px 40px;
   border-radius: 16px;
   width: 420px;
@@ -24,9 +23,12 @@ body {
   text-align: center;
   border: 2px solid #00ffff;
   box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff33;
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
 }
 
-/* ===== Header ===== */
+/* Header */
 h1 {
   margin-bottom: 20px;
   color: #00ffff;
@@ -35,7 +37,7 @@ h1 {
   text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff66;
 }
 
-/* ===== Input Fields ===== */
+/* Inputs */
 .input-row {
   display: flex;
   flex-direction: column;
@@ -62,7 +64,7 @@ input[type="datetime-local"]:focus {
   border-color: #00ffff;
 }
 
-/* ===== Buttons ===== */
+/* Button */
 button {
   padding: 12px 16px;
   border: none;
@@ -73,7 +75,7 @@ button {
   cursor: pointer;
   transition: 0.3s;
   box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff66;
-  margin-bottom: 25px; /* 🔹 added space below button */
+  margin-bottom: 15px;
 }
 
 button:hover {
@@ -81,14 +83,28 @@ button:hover {
   box-shadow: 0 0 15px #00ffff, 0 0 25px #00ffffaa;
 }
 
-/* ===== To-do List ===== */
-ul {
+/* Scrollable Task List */
+#taskList {
   list-style: none;
   padding: 0;
-  margin: 20px 0 0; /* 🔹 added top margin so tasks are lower */
+  margin: 0;
   text-align: left;
+  flex-grow: 1;
+  overflow-y: auto;
+  max-height: 50vh;
+  scrollbar-width: thin;
+  scrollbar-color: #00ffff #0d111f;
 }
 
+#taskList::-webkit-scrollbar {
+  width: 6px;
+}
+#taskList::-webkit-scrollbar-thumb {
+  background: #00ffff;
+  border-radius: 4px;
+}
+
+/* Task */
 li {
   display: flex;
   flex-direction: column;
@@ -105,13 +121,13 @@ li:hover {
   box-shadow: 0 0 10px #00ffff55, 0 4px 12px #00ffff33;
 }
 
-/* Completed task style */
+/* Completed */
 li.completed span.task-text {
   text-decoration: line-through;
   color: #5555ff;
 }
 
-/* ===== Task Header ===== */
+/* Task header */
 .task-header {
   display: flex;
   justify-content: space-between;
@@ -120,17 +136,16 @@ li.completed span.task-text {
 
 .task-schedule {
   font-size: 14px;
-  color: #ffffffaa; /* white calendar text */
+  color: #ffffffaa;
   margin-top: 6px;
   font-style: italic;
 }
-
 .task-schedule::before {
-  content: "📅 "; /* white calendar */
+  content: "📅 ";
   color: #ffffff;
 }
 
-/* ===== Task Buttons ===== */
+/* Task buttons */
 .task-buttons {
   display: flex;
   gap: 8px;
@@ -141,10 +156,8 @@ li.completed span.task-text {
   color: #0a0f1c;
   box-shadow: 0 0 10px #00ff7f, 0 0 20px #00ff7f66;
 }
-
 .complete-btn:hover {
   background: #00e066;
-  box-shadow: 0 0 15px #00ff7f, 0 0 25px #00ff7faa;
 }
 
 .delete-btn {
@@ -152,14 +165,13 @@ li.completed span.task-text {
   color: #fff;
   box-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055aa;
 }
-
 .delete-btn:hover {
   background: #cc0044;
-  box-shadow: 0 0 15px #ff0055, 0 0 25px #ff0055cc;
 }
 
-/* ===== Modal Styles ===== */
-#deleteModal {
+/* Modals */
+#deleteModal,
+#editModal {
   display: none;
   position: fixed;
   top: 0;
@@ -172,37 +184,27 @@ li.completed span.task-text {
   z-index: 1000;
 }
 
-#deleteModal .modal-content {
+.modal-content {
   background: #111522;
   padding: 20px 30px;
   border-radius: 12px;
   text-align: center;
-  border: 2px solid #ff0055;
-  box-shadow: 0 0 20px #ff0055, 0 0 40px #ff005566;
   color: #fff;
+  width: 300px;
 }
 
-#deleteModal .modal-buttons {
+#deleteModal .modal-content {
+  border: 2px solid #ff0055;
+  box-shadow: 0 0 20px #ff0055, 0 0 40px #ff005566;
+}
+#editModal .modal-content {
+  border: 2px solid #00ffff;
+  box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff66;
+}
+
+.modal-buttons {
   margin-top: 15px;
   display: flex;
   gap: 10px;
   justify-content: center;
-}
-
-#deleteModal button {
-  padding: 10px 16px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-#deleteModal #confirmDelete {
-  background: #ff0055;
-  color: #fff;
-}
-
-#deleteModal #cancelDelete {
-  background: #00ffff;
-  color: #0a0f1c;
 }
