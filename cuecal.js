@@ -9,9 +9,20 @@ function showSignUp() {
   document.getElementById("signup").classList.remove("hidden");
 }
 
-// Password validation function (LUDS-8)
+// Toggle password visibility
+function togglePassword(inputId, icon) {
+  const input = document.getElementById(inputId);
+  if (input.type === "password") {
+    input.type = "text";
+    icon.src = "eye-off.png";
+  } else {
+    input.type = "password";
+    icon.src = "eye.png";
+  }
+}
+
+// Password validation
 function isValidPassword(password) {
-  // At least 8 characters, 1 lowercase, 1 uppercase, 1 digit, 1 special character
   return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(password);
 }
 
@@ -28,8 +39,6 @@ function signUp() {
 
   if (!isValidPassword(password)) {
     alert("Password must be at least 8 characters long and include:\n- 1 uppercase letter\n- 1 lowercase letter\n- 1 number\n- 1 special character");
-    passwordInput.classList.add("invalid");
-    passwordInput.classList.remove("valid");
     return;
   }
 
@@ -47,19 +56,34 @@ function signUp() {
 
 // Login
 function login() {
-  const username = document.getElementById("login-username").value;
+  const username = document.getElementById("login-username").value.trim();
   const password = document.getElementById("login-password").value;
+  const remember = document.getElementById("remember-me").checked;
 
   let users = JSON.parse(localStorage.getItem("users")) || [];
   let user = users.find(u => u.username === username && u.password === password);
 
   if (user) {
+    if (remember) {
+      localStorage.setItem("rememberedUser", username);
+    } else {
+      localStorage.removeItem("rememberedUser");
+    }
     document.getElementById("login").classList.add("hidden");
     document.getElementById("calculator-page").classList.remove("hidden");
   } else {
-    alert("Invalid credentials. If you recently signed up, ensure your password meets the requirements.");
+    alert("Invalid credentials.");
   }
 }
+
+// Auto-fill remembered user
+window.onload = function() {
+  const rememberedUser = localStorage.getItem("rememberedUser");
+  if (rememberedUser) {
+    document.getElementById("login-username").value = rememberedUser;
+    document.getElementById("remember-me").checked = true;
+  }
+};
 
 // Logout
 function logout() {
@@ -90,17 +114,3 @@ function clearDisplay() {
   expression = "";
   document.getElementById("display").innerText = "0";
 }
-
-// Real-time password validation styling
-const signupPasswordInput = document.getElementById("signup-password");
-signupPasswordInput.addEventListener("input", function () {
-  if (this.value === "") {
-    this.classList.remove("valid", "invalid");
-  } else if (isValidPassword(this.value)) {
-    this.classList.add("valid");
-    this.classList.remove("invalid");
-  } else {
-    this.classList.add("invalid");
-    this.classList.remove("valid");
-  }
-});
