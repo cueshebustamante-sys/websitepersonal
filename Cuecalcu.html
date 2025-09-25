@@ -3,30 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <title>Calculator with Login</title>
-  <link rel="stylesheet" href="calcue.css">
+  <link rel="stylesheet" href="cal.css">
 </head>
 <body>
   <video autoplay muted loop id="bg-video">
     <source src="calbg.mp4" type="video/mp4">
-   
   </video>
 
-  <!-- Sign Up Page -->
-  <div id="signup" class="container">
-    <h2>Sign Up</h2>
-    <input id="signup-username" type="text" placeholder="Username">
-    <input id="signup-password" type="password" placeholder="Password">
-    <button onclick="signUp()">Sign Up</button>
-    <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
-  </div>
-
   <!-- Login Page -->
-  <div id="login" class="container hidden">
+  <div id="login" class="container">
     <h2>Login</h2>
-    <input id="login-username" type="text" placeholder="Username">
-    <input id="login-password" type="password" placeholder="Password">
+    <input id="login-username" type="text" placeholder="Email or Username">
+
+    <div class="password-field">
+      <input id="login-password" type="password" placeholder="Password">
+      <img src="eye.png" class="toggle-eye" onclick="togglePassword('login-password', this)">
+    </div>
+
+    <!-- ✅ Remember Me -->
+    <div class="remember-wrapper">
+      <label class="remember-me">
+        <input type="checkbox" id="remember-me">
+        <span>Remember Me</span>
+      </label>
+    </div>
+
     <button onclick="login()">Login</button>
     <p>No account? <a href="#" onclick="showSignUp()">Sign Up</a></p>
+  </div>
+
+  <!-- Sign Up Page -->
+  <div id="signup" class="container hidden">
+    <h2>Sign Up</h2>
+    <input id="signup-username" type="text" placeholder="Email or Username">
+
+    <div class="password-field">
+      <input id="signup-password" type="password" placeholder="Password">
+      <img src="eye.png" class="toggle-eye" onclick="togglePassword('signup-password', this)">
+    </div>
+
+    <button onclick="signUp()">Sign Up</button>
+    <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
   </div>
 
   <!-- Calculator Page -->
@@ -59,6 +76,6 @@
     <button onclick="logout()" class="logout-btn">Logout</button>
   </div>
 
-  <script src="cuecal.js"></script>
+  <script src="cal.js"></script>
 </body>
 </html>
