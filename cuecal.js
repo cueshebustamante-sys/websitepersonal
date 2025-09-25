@@ -9,15 +9,15 @@ function showSignUp() {
   document.getElementById("signup").classList.remove("hidden");
 }
 
-// Toggle password visibility
+// Toggle password visibility with emoji
 function togglePassword(inputId, icon) {
   const input = document.getElementById(inputId);
   if (input.type === "password") {
     input.type = "text";
-    icon.src = "eye-off.png";
+    icon.textContent = "🙈"; // hide emoji
   } else {
     input.type = "password";
-    icon.src = "eye.png";
+    icon.textContent = "👁"; // show emoji
   }
 }
 
