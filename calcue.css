@@ -1,4 +1,4 @@
- /* Cyberpunk Blue Theme */
+/* Cyberpunk Blue Theme */
 body, html {
   margin: 0;
   padding: 0;
@@ -63,7 +63,7 @@ input:focus {
   box-shadow: 0 0 10px #00eaff;
 }
 
-/* Password field with eye icon */
+/* Password field with emoji eye */
 .password-field {
   position: relative;
   width: 100%;
@@ -80,10 +80,10 @@ input:focus {
   right: 12px;
   top: 50%;
   transform: translateY(-50%);
-  width: 22px;
-  height: 22px;
+  font-size: 20px;   /* emoji size */
   cursor: pointer;
   opacity: 0.8;
+  user-select: none;
 }
 
 .toggle-eye:hover {
@@ -105,7 +105,7 @@ input:focus {
   font-size: 14px;
   color: #a8eaff;
   cursor: pointer;
-  white-space: nowrap;   /* ✅ Keep text straight, no wrapping */
+  white-space: nowrap;   /* keep text straight */
 }
 
 .remember-me input {
@@ -116,7 +116,7 @@ input:focus {
 }
 
 .remember-me span {
-  line-height: 1; /* keep text vertically aligned */
+  line-height: 1;
 }
 
 /* Buttons */
