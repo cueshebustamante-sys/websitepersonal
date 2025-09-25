@@ -3,26 +3,24 @@ const taskSchedule = document.getElementById("taskSchedule");
 const addTaskBtn = document.getElementById("addTaskBtn");
 const taskList = document.getElementById("taskList");
 
-// ===== Modal Creation =====
-const modal = document.createElement("div");
-modal.id = "deleteModal";
-modal.innerHTML = `
-  <div class="modal-content">
-    <p>Are you sure you want to delete this task?</p>
-    <div class="modal-buttons">
-      <button id="confirmDelete">Yes</button>
-      <button id="cancelDelete">No</button>
-    </div>
-  </div>
-`;
-document.body.appendChild(modal);
+// ===== Delete Modal =====
+const deleteModal = document.getElementById("deleteModal");
+const confirmDelete = document.getElementById("confirmDelete");
+const cancelDelete = document.getElementById("cancelDelete");
 let taskToDelete = null;
 
-// ===== Add Task Function =====
+// ===== Edit Modal =====
+const editModal = document.getElementById("editModal");
+const editTaskInput = document.getElementById("editTaskInput");
+const editTaskSchedule = document.getElementById("editTaskSchedule");
+const saveEdit = document.getElementById("saveEdit");
+const cancelEdit = document.getElementById("cancelEdit");
+let taskToEdit = null;
+
+// ===== Add Task =====
 function addTask() {
   const taskText = taskInput.value.trim();
   const scheduleValue = taskSchedule.value;
-
   if (!taskText || !scheduleValue) return;
 
   const li = document.createElement("li");
@@ -33,6 +31,14 @@ function addTask() {
   const span = document.createElement("span");
   span.textContent = taskText;
   span.className = "task-text";
+
+  // ===== Double click to edit =====
+  span.ondblclick = () => {
+    taskToEdit = li;
+    editTaskInput.value = span.textContent;
+    editTaskSchedule.value = scheduleValue;
+    editModal.style.display = "flex";
+  };
 
   const buttonsDiv = document.createElement("div");
   buttonsDiv.className = "task-buttons";
@@ -47,7 +53,7 @@ function addTask() {
   deleteBtn.className = "delete-btn";
   deleteBtn.onclick = () => {
     taskToDelete = li;
-    modal.style.display = "flex";
+    deleteModal.style.display = "flex";
   };
 
   buttonsDiv.appendChild(completeBtn);
@@ -60,6 +66,7 @@ function addTask() {
   const date = new Date(scheduleValue);
   schedule.textContent = date.toLocaleString();
 
+  li.dataset.schedule = scheduleValue;
   li.appendChild(header);
   li.appendChild(schedule);
   taskList.appendChild(li);
@@ -69,16 +76,35 @@ function addTask() {
   taskInput.focus();
 }
 
-// ===== Modal Buttons =====
-document.getElementById("confirmDelete").onclick = () => {
+// ===== Delete Modal Actions =====
+confirmDelete.onclick = () => {
   if (taskToDelete) taskToDelete.remove();
-  modal.style.display = "none";
+  deleteModal.style.display = "none";
+  taskToDelete = null;
+};
+cancelDelete.onclick = () => {
+  deleteModal.style.display = "none";
   taskToDelete = null;
 };
 
-document.getElementById("cancelDelete").onclick = () => {
-  modal.style.display = "none";
-  taskToDelete = null;
+// ===== Edit Modal Actions =====
+saveEdit.onclick = () => {
+  if (taskToEdit) {
+    const newText = editTaskInput.value.trim();
+    const newSchedule = editTaskSchedule.value;
+    if (newText && newSchedule) {
+      taskToEdit.querySelector(".task-text").textContent = newText;
+      const date = new Date(newSchedule);
+      taskToEdit.querySelector(".task-schedule").textContent = date.toLocaleString();
+      taskToEdit.dataset.schedule = newSchedule;
+    }
+  }
+  editModal.style.display = "none";
+  taskToEdit = null;
+};
+cancelEdit.onclick = () => {
+  editModal.style.display = "none";
+  taskToEdit = null;
 };
 
 // ===== Event Listeners =====
