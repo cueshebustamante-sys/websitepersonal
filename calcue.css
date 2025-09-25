@@ -1,4 +1,4 @@
-/* Cyberpunk Blue Theme */
+ /* Cyberpunk Blue Theme */
 body, html {
   margin: 0;
   padding: 0;
@@ -21,7 +21,7 @@ body, html {
   filter: brightness(0.4) contrast(1.2);
 }
 
-/* Shared container (Sign Up, Login, Calculator) */
+/* Shared container */
 .container {
   position: absolute;
   top: 50%;
@@ -37,26 +37,15 @@ body, html {
   animation: fadeIn 0.8s ease-in-out;
 }
 
-/* Calculator container */
-#calculator-page.container {
-  width: 260px;
-  padding: 15px;
-  border: 2px solid #00f6ff;
-  border-radius: 10px;
-  background: rgba(10, 20, 40, 0.9);
-  box-shadow: 0 0 12px #00eaff, 0 0 20px #007a9e inset;
-  text-align: center;
-}
-
 .container h2 {
   color: #00f6ff;
   text-shadow: 0 0 10px #00f6ff, 0 0 20px #0096ff;
   margin-bottom: 20px;
 }
 
-/* Input fields */
+/* Inputs */
 input {
-  width: 90%;
+  width: 100%;
   padding: 12px;
   margin: 10px 0;
   border: 2px solid #00f6ff;
@@ -66,6 +55,7 @@ input {
   font-size: 14px;
   outline: none;
   transition: 0.3s;
+  box-sizing: border-box;
 }
 
 input:focus {
@@ -73,32 +63,65 @@ input:focus {
   box-shadow: 0 0 10px #00eaff;
 }
 
-/* Password validation styles */
-input.invalid {
-  border-color: #ff4d4d !important;
-  box-shadow: 0 0 10px #ff4d4d !important;
+/* Password field with eye icon */
+.password-field {
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
 }
 
-input.valid {
-  border-color: #00ffcc !important;
-  box-shadow: 0 0 10px #00ffcc !important;
+.password-field input {
+  width: 100%;
+  padding-right: 42px;
 }
 
-/* Password hint */
-.password-hint {
-  font-size: 12px;
-  color: #00eaff;
-  margin-top: -5px;
-  margin-bottom: 8px;
-  text-align: left;
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
+.toggle-eye {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.toggle-eye:hover {
+  opacity: 1;
+}
+
+/* ✅ Remember Me Styling */
+.remember-wrapper {
+  width: 100%;
+  margin: 6px 0 14px;
+  display: flex;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #a8eaff;
+  cursor: pointer;
+  white-space: nowrap;   /* ✅ Keep text straight, no wrapping */
+}
+
+.remember-me input {
+  margin-right: 6px;
+  accent-color: #00f6ff;
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.remember-me span {
+  line-height: 1; /* keep text vertically aligned */
 }
 
 /* Buttons */
 button {
-  width: 95%;
+  width: 100%;
   padding: 12px;
   margin: 12px 0;
   border: none;
@@ -135,7 +158,7 @@ button:hover {
   display: none;
 }
 
-/* === Calculator Display === */
+/* Calculator Display */
 #display {
   grid-column: span 4;
   padding: 8px;
@@ -152,7 +175,7 @@ button:hover {
   overflow-x: auto;
 }
 
-/* === Calculator Grid === */
+/* Calculator Grid */
 .calculator {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -160,7 +183,6 @@ button:hover {
   margin-top: 8px;
 }
 
-/* === Calculator Buttons === */
 .calculator button {
   padding: 8px;
   font-size: 13px;
@@ -178,22 +200,6 @@ button:hover {
 .calculator button:hover {
   background: #001a33;
   box-shadow: 0 0 12px #00f6ff, 0 0 18px #0077ff inset;
-}
-
-/* === Clear Button === */
-.calculator button[onclick="clearDisplay()"] {
-  grid-column: span 4;
-  background: linear-gradient(135deg, #ff3b3b, #b30000);
-  color: #fff;
-  border: none;
-  padding: 10px;
-  font-size: 14px;
-  box-shadow: 0 0 10px #ff3b3b;
-}
-
-.calculator button[onclick="clearDisplay()"]:hover {
-  background: linear-gradient(135deg, #ff5c5c, #cc0000);
-  box-shadow: 0 0 15px #ff4d4d, 0 0 20px #ff0000 inset;
 }
 
 /* Glow animations */
