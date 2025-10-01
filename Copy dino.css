@@ -1,0 +1,112 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  /* Softer semi-blue gradient */
+  background: radial-gradient(circle at center, #3399ff, #001a33);
+}
+
+/* Game Box */
+.game-box {
+  position: relative;
+  width: 1000px;
+  height: 300px;
+  border: 2px solid #66ccff; /* lighter blue */
+  overflow: hidden;
+  background: rgba(0, 10, 30, 0.7);
+  box-shadow: 0 0 15px #3399ff, 0 0 25px #003366 inset; /* softer glow */
+}
+
+/* Background video */
+#bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Scoreboard */
+.scoreboard {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  color: #66ccff;
+  font-size: 18px;
+  font-weight: bold;
+  text-shadow: 0 0 6px #3399ff;
+  display: flex;
+  gap: 30px;
+  z-index: 5;
+}
+
+/* Ground */
+#ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 25px;
+  background: linear-gradient(to top, #033, #011);
+  border-top: 2px solid #3399ff;
+  z-index: 1;
+  box-shadow: 0 0 10px #3399ff;
+}
+
+/* Ghost Player */
+#ghost {
+  position: absolute;
+  bottom: 25px;
+  left: 50px;
+  width: 80px;
+  height: 80px;
+  background: url("ghost.png") no-repeat center/contain;
+  z-index: 3;
+  animation: float 1s infinite alternate ease-in-out;
+  filter: drop-shadow(0 0 6px #66ccff); /* subtle semi-blue glow */
+}
+
+/* Floating ghost effect */
+@keyframes float {
+  from { transform: translateY(0); }
+  to { transform: translateY(-6px); }
+}
+
+/* Blade video */
+#blade {
+  position: absolute;
+  bottom: 25px;
+  right: -80px;
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  display: none;
+  z-index: 2;
+}
+
+/* Missile video */
+#missile {
+  position: absolute;
+  top: 60px;
+  right: -80px;
+  width: 60px;
+  height: 25px;
+  object-fit: contain;
+  display: none;
+  z-index: 2;
+}

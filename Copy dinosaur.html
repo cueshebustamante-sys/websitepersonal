@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ghost Runner</title>
+  <link rel="stylesheet" href="dino.css">
+</head>
+<body>
+  <div class="game-box">
+    <!-- Video Background -->
+    <video autoplay loop muted playsinline id="bg-video">
+      <source src="your-video.mp4" type="video/mp4">
+    </video>
+
+    <!-- Scoreboard -->
+    <div class="scoreboard">
+      <span id="score">Score: 0</span>
+      <span id="highscore">High Score: 0</span>
+    </div>
+
+    <!-- Ground -->
+    <div id="ground"></div>
+
+    <!-- Ghost Player -->
+    <div id="ghost"></div>
+
+    <!-- Obstacles -->
+    <video autoplay loop muted playsinline id="blade">
+      <source src="blade-video.mp4" type="video/mp4">
+    </video>
+
+    <video autoplay loop muted playsinline id="missile">
+      <source src="missile-video.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <script src="di.js"></script>
+</body>
+</html>
