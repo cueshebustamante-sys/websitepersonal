@@ -1,0 +1,391 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('List.jpg') no-repeat center center/cover;
+  background-attachment: fixed;
+  padding: 20px;
+}
+
+/* Main Container */
+.todo-box {
+  width: 100%;
+  max-width: 500px;
+  background: rgba(173, 216, 230, 0.25);
+  border-radius: 15px;
+  padding: 20px;
+  border: 1px solid rgba(173, 216, 230, 0.5);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  color: #222;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+}
+
+.todo-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+/* Inputs */
+.input-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  width: 100%;
+  position: relative;
+}
+
+.input-row input,
+.input-row textarea {
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(173, 216, 230, 0.7);
+  outline: none;
+  background: rgba(255,255,255,0.85);
+  color: #222;
+  resize: vertical;
+}
+
+.input-row input::placeholder,
+.input-row textarea::placeholder {
+  color: #555;
+}
+
+.char-limit {
+  font-size: 12px;
+  color: #555;
+  text-align: right;
+  margin-top: 3px;
+}
+
+.input-row input.invalid,
+.input-row textarea.invalid {
+  border: 2px solid #f44336;
+  background: rgba(255,200,200,0.85);
+}
+
+/* Center only Add & Show Done buttons */
+#addTaskBtn, #showDoneBtn {
+  display: block;
+  margin: 10px auto 0 auto; /* centers horizontally */
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  background: rgba(80, 80, 80, 0.85);
+  color: #fff;
+  cursor: pointer;
+}
+
+#showDoneBtn {
+  margin-top: 8px; /* spacing below Add */
+}
+
+#addTaskBtn:hover,
+#showDoneBtn:hover {
+  background: rgba(60, 60, 60, 0.85);
+}
+
+/* Task List Scrollable */
+#taskList {
+  margin-top: 20px;
+  list-style: none;
+  max-height: 300px;
+  overflow-y: auto;
+  width: 100%;
+  padding-right: 5px;
+}
+
+#taskList::-webkit-scrollbar {
+  width: 8px;
+}
+
+#taskList::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 10px;
+}
+
+/* Task Card Wrapper & Spacing */
+.task-card-wrapper {
+  position: relative;
+  margin-bottom: 15px; /* space between cards */
+}
+
+/* Task Card with Shooting Stars Background */
+.task-card, .done-task-card {
+  position: relative;
+  background: linear-gradient(to bottom, #0b1f3f 0%, #0d2a55 100%);
+  padding: 20px; /* internal spacing */
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border: 1px solid rgba(173,216,230,0.7);
+  animation: wave 3s ease-in-out infinite;
+  transition: transform 0.3s ease;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Shooting stars pseudo-elements */
+.task-card::before, .done-task-card::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  left: 0;
+  width: 2px;
+  height: 80px;
+  background: linear-gradient(180deg, rgba(0,255,255,0.8) 0%, rgba(0,255,255,0) 100%);
+  opacity: 0.7;
+  transform: rotate(45deg);
+  animation: shootingStars 2s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.task-card::after, .done-task-card::after {
+  content: "";
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  width: 2px;
+  height: 60px;
+  background: linear-gradient(180deg, rgba(0,255,255,0.8) 0%, rgba(0,255,255,0) 100%);
+  opacity: 0.7;
+  transform: rotate(30deg);
+  animation: shootingStars 2.5s linear infinite;
+}
+
+/* Task content above stars */
+.task-info, .done-task-info {
+  position: relative;
+  z-index: 1;
+  background: rgba(255,255,255,0.15);
+  padding: 5px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+}
+
+.task-info .task-title, .done-task-info .task-title {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.task-info .task-date, .done-task-info .task-date {
+  font-size: 12px;
+  color: #ccc;
+}
+
+.task-note, .done-task-info .task-note {
+  background: rgba(0,255,255,0.1);
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  border: 1px solid rgba(0,255,255,0.4);
+}
+
+/* Task Buttons */
+.task-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-left: 10px;
+}
+
+.task-buttons button {
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #fff;
+  background: #888;
+}
+
+.task-buttons button:hover {
+  background: #666;
+}
+
+/* Done Tasks Box */
+.done-box {
+  display: none;
+  position: fixed;
+  top: 50px;
+  right: 50px;
+  width: 400px;
+  max-height: 70%;
+  overflow: hidden;
+  background: rgba(0, 0, 50, 0.85);
+  border-radius: 15px;
+  padding: 20px;
+  border: 1px solid rgba(0,128,255,0.5);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  color: #fff;
+  z-index: 100;
+  flex-direction: column;
+}
+
+#doneList {
+  overflow-y: auto;
+  max-height: 100%;
+  list-style: none;
+  margin-top: 10px;
+  padding-right: 5px;
+}
+
+#doneList::-webkit-scrollbar {
+  width: 8px;
+}
+
+#doneList::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 10px;
+}
+
+/* Done task card layout */
+.done-task-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Done task info */
+.done-task-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Done buttons */
+.done-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  margin-left: 10px;
+}
+
+.done-buttons button {
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  background: #888;
+  color: #fff;
+}
+
+.done-buttons button:hover {
+  background: #666;
+}
+
+/* Modals */
+#deleteModal, #editModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: rgba(173,216,230,0.25);
+  padding: 25px 30px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#editTaskTitle, #editTaskDescription, #editTaskSchedule {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: 1px solid rgba(173,216,230,0.7);
+  outline: none;
+  background: rgba(255,255,255,0.85);
+}
+
+#editTaskDescription {
+  resize: vertical;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.modal-buttons button {
+  flex: 1;
+  padding: 10px 0;
+  border-radius: 10px;
+  background: #888;
+  color: #fff;
+}
+
+.modal-buttons button:hover {
+  background: #666;
+}
+
+#confirmDelete {
+  background: #f44336;
+}
+
+#confirmDelete:hover {
+  background: #d32f2f;
+}
+
+/* Waving animation */
+@keyframes wave {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  20%  { transform: translate(-3px, -3px) rotate(-1deg); }
+  40%  { transform: translate(3px, -2px) rotate(1deg); }
+  60%  { transform: translate(-2px, 2px) rotate(-1deg); }
+  80%  { transform: translate(2px, 3px) rotate(1deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* Shooting stars animation */
+@keyframes shootingStars {
+  0% {
+    transform: translate(0, -100%) rotate(45deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(150%, 120%) rotate(45deg);
+    opacity: 0;
+  }
+}
