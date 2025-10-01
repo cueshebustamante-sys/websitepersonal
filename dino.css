@@ -149,7 +149,7 @@ body {
 }
 
 /* Ghost jump & float animations */
-.ghost-jump { animation: ghostJump 0.8s ease-out forwards !important; }
+.ghost-jump { animation: ghostJump 1s ease-out forwards !important; }
 .ghost-floating { animation: float 1.5s ease-in-out infinite; }
 
 @keyframes ghostJump {
