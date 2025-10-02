@@ -184,22 +184,27 @@ body {
   flex: 1;
 }
 
+/* Task Title */
 .task-info .task-title, .done-task-info .task-title {
   font-weight: bold;
   text-transform: uppercase;
+  color: #add8e6; /* Light Blue */
 }
 
+/* Task Date */
 .task-info .task-date, .done-task-info .task-date {
   font-size: 12px;
-  color: #ccc;
+  color: #add8e6; /* Light Blue */
 }
 
+/* Task Description / Note */
 .task-note, .done-task-info .task-note {
   background: rgba(0,255,255,0.1);
   padding: 10px;
   border-radius: 10px;
   font-size: 14px;
   border: 1px solid rgba(0,255,255,0.4);
+  color: #add8e6; /* Light Blue */
 }
 
 /* Task Buttons */
