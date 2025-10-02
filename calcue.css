@@ -9,7 +9,6 @@ body, html {
   background: #0a0f1c;
 }
 
-/* Background video */
 #bg-video {
   position: fixed;
   right: 0;
@@ -21,7 +20,6 @@ body, html {
   filter: brightness(0.4) contrast(1.2);
 }
 
-/* Shared container */
 .container {
   position: absolute;
   top: 50%;
@@ -43,7 +41,6 @@ body, html {
   margin-bottom: 20px;
 }
 
-/* Inputs */
 input {
   width: 100%;
   padding: 12px;
@@ -63,7 +60,6 @@ input:focus {
   box-shadow: 0 0 10px #00eaff;
 }
 
-/* Password field with emoji eye */
 .password-field {
   position: relative;
   width: 100%;
@@ -80,7 +76,7 @@ input:focus {
   right: 12px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 20px;   /* emoji size */
+  font-size: 20px;
   cursor: pointer;
   opacity: 0.8;
   user-select: none;
@@ -90,7 +86,6 @@ input:focus {
   opacity: 1;
 }
 
-/* ✅ Remember Me Styling */
 .remember-wrapper {
   width: 100%;
   margin: 6px 0 14px;
@@ -105,7 +100,7 @@ input:focus {
   font-size: 14px;
   color: #a8eaff;
   cursor: pointer;
-  white-space: nowrap;   /* keep text straight */
+  white-space: nowrap;
 }
 
 .remember-me input {
@@ -119,7 +114,6 @@ input:focus {
   line-height: 1;
 }
 
-/* Buttons */
 button {
   width: 100%;
   padding: 12px;
@@ -142,7 +136,6 @@ button:hover {
   box-shadow: 0 0 20px #00f6ff, 0 0 40px #0077ff;
 }
 
-/* Logout button */
 .logout-btn {
   background: linear-gradient(135deg, #555, #333);
   box-shadow: 0 0 8px #444;
@@ -153,12 +146,10 @@ button:hover {
   box-shadow: 0 0 15px #888;
 }
 
-/* Hide/show */
 .hidden {
   display: none;
 }
 
-/* Calculator Display */
 #display {
   grid-column: span 4;
   padding: 8px;
@@ -175,7 +166,6 @@ button:hover {
   overflow-x: auto;
 }
 
-/* Calculator Grid */
 .calculator {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -202,8 +192,13 @@ button:hover {
   box-shadow: 0 0 12px #00f6ff, 0 0 18px #0077ff inset;
 }
 
-/* Glow animations */
 @keyframes fadeIn {
   from { opacity: 0; transform: translate(-50%, -40%); }
   to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+/* Invalid input highlight */
+input.invalid {
+  border-color: #e74c3c !important;
+  box-shadow: 0 0 8px #e74c3c;
 }
