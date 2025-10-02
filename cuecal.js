@@ -21,14 +21,9 @@ function togglePassword(inputId, icon) {
   }
 }
 
-// Password validation
+// Password validation: must follow LUDS (letters, uppercase, digits, underscores)
 function isValidPassword(password) {
-  return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(password);
-}
-
-// LUDS username validation
-function isValidUsername(username) {
-  return /^[A-Za-z0-9_]+$/.test(username);
+  return /^[A-Za-z0-9_]{8,}$/.test(password);
 }
 
 // Sign Up
@@ -53,15 +48,9 @@ function signUp() {
     hasError = true;
   }
 
-  if (!isValidUsername(username)) {
-    usernameInput.classList.add("invalid");
-    alert("Username can only include letters, digits, and underscores (LUDS).");
-    hasError = true;
-  }
-
   if (!isValidPassword(password)) {
     passwordInput.classList.add("invalid");
-    alert("Password must be at least 8 characters long and include:\n- 1 uppercase letter\n- 1 lowercase letter\n- 1 number\n- 1 special character");
+    alert("Password must be at least 8 characters and include only letters, uppercase, digits, or underscores (LUDS).");
     hasError = true;
   }
 
