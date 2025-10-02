@@ -9,15 +9,15 @@ function showSignUp() {
   document.getElementById("signup").classList.remove("hidden");
 }
 
-// Toggle password visibility with emoji
+// Toggle password visibility
 function togglePassword(inputId, icon) {
   const input = document.getElementById(inputId);
   if (input.type === "password") {
     input.type = "text";
-    icon.textContent = "🙈"; // hide emoji
+    icon.textContent = "🙈";
   } else {
     input.type = "password";
-    icon.textContent = "👁"; // show emoji
+    icon.textContent = "👁";
   }
 }
 
@@ -26,24 +26,56 @@ function isValidPassword(password) {
   return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(password);
 }
 
+// LUDS username validation
+function isValidUsername(username) {
+  return /^[A-Za-z0-9_]+$/.test(username);
+}
+
 // Sign Up
 function signUp() {
-  const username = document.getElementById("signup-username").value.trim();
+  const usernameInput = document.getElementById("signup-username");
   const passwordInput = document.getElementById("signup-password");
-  const password = passwordInput.value;
+  const confirmInput = document.getElementById("signup-confirm");
 
-  if (!username || !password) {
+  const username = usernameInput.value.trim();
+  const password = passwordInput.value;
+  const confirm = confirmInput.value;
+
+  [usernameInput, passwordInput, confirmInput].forEach(input => input.classList.remove("invalid"));
+
+  let hasError = false;
+
+  if (!username || !password || !confirm) {
+    if (!username) usernameInput.classList.add("invalid");
+    if (!password) passwordInput.classList.add("invalid");
+    if (!confirm) confirmInput.classList.add("invalid");
     alert("Fill in all fields");
-    return;
+    hasError = true;
+  }
+
+  if (!isValidUsername(username)) {
+    usernameInput.classList.add("invalid");
+    alert("Username can only include letters, digits, and underscores (LUDS).");
+    hasError = true;
   }
 
   if (!isValidPassword(password)) {
+    passwordInput.classList.add("invalid");
     alert("Password must be at least 8 characters long and include:\n- 1 uppercase letter\n- 1 lowercase letter\n- 1 number\n- 1 special character");
-    return;
+    hasError = true;
   }
+
+  if (password !== confirm) {
+    confirmInput.classList.add("invalid");
+    alert("Passwords do not match.");
+    hasError = true;
+  }
+
+  if (hasError) return;
 
   let users = JSON.parse(localStorage.getItem("users")) || [];
   if (users.find(u => u.username === username)) {
+    usernameInput.classList.add("invalid");
     alert("User already exists");
     return;
   }
